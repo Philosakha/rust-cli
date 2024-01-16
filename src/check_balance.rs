@@ -45,5 +45,9 @@ pub async fn check_balance() {
 
     let url = format!("https://api.minaexplorer.com/accounts/{}", public_key);
 
-    print!("Checking balance for {}...", public_key);
+    let client = reqwest::Client::new();
+
+    let response = client.get(&url).header("Accept", "*/*").send().await;
+
+    print!("{:?}", response.unwrap().text().await.unwrap());
 }

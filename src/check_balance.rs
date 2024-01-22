@@ -14,21 +14,21 @@ struct MinaAccountsData {
 
 #[derive(Debug, serde::Deserialize)]
 struct Account {
-    publicKey: String,
+    public_key: String,
     balance: Balance,
 }
 
 #[derive(Debug, serde::Deserialize)]
 struct Balance {
     total: f64,
-    lockedBalnce: f64,
-    blockHeight: f64,
+    locked_balance: f64,
+    block_height: f64,
     unknown: f64,
 }
 #[derive(Debug, serde::Deserialize)]
 struct Status {
-    syncStatus: String,
-    blockchainLength: f64,
+    sync_status: String,
+    blockchain_length: f64,
 }
 
 // declare the parser
@@ -49,5 +49,13 @@ pub async fn check_balance() {
 
     let response = client.get(&url).header("Accept", "*/*").send().await;
 
-    print!("{:?}", response.unwrap().text().await.unwrap());
+    /// split the data around \
+
+    let data = response.unwrap().text().await.unwrap();
+
+    let data = data.split("\\");
+    let data = data.collect::<Vec<&str>>();
+
+    let data = data[0];
+    print!("{} ", data);
 }

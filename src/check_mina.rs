@@ -1,3 +1,5 @@
+use prettytable::{ row, Cell, Row, Table };
+
 use clap::Parser;
 use reqwest;
 
@@ -36,5 +38,13 @@ pub async fn check_mina() {
 
     let json: Main = serde_json::from_str(&body).unwrap();
 
-    print!("The total currency is: {} ", json.totalCurrency);
+    let mut table = Table::new();
+
+    table.add_row(row!["Blockchain Length", json.blockchainLength]);
+    table.add_row(row!["Circular Supply", json.circulatingSupply]);
+    table.add_row(row!["Epoch", json.epoch]);
+    table.add_row(row!["State Hash", json.stateHash]);
+    table.add_row(row!["Total Currency", json.totalCurrency]);
+
+    table.printstd();
 }

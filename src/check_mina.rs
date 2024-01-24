@@ -1,4 +1,4 @@
-use prettytable::{ row, Cell, Row, Table };
+use prettytable::{row, Cell, Row, Table};
 
 use clap::Parser;
 use reqwest;

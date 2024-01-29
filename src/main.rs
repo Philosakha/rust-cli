@@ -2,7 +2,7 @@ mod check_balance;
 mod check_mina;
 use clap::Parser;
 
-use terminal_menu::{ menu, label, button, run, mut_menu };
+use terminal_menu::{button, label, menu, mut_menu, run};
 
 // declare the parser
 
@@ -35,23 +35,20 @@ async fn main() {
     //     println!("Please enter a valid command");
     // }
 
-    let menu = menu(
-        vec![
-            // label:
-            //  not selectable, useful as a title, separator, etc...
-            label("----------------------"),
-            label("terminal-menu"),
-            label("use wasd or arrow keys"),
-            label("enter to select"),
-            label("'q' or esc to exit"),
-            label("-----------------------"),
-
-            // button:
-            //  exit the menu
-            button("Check Balance"),
-            button("Check Mina")
-        ]
-    );
+    let menu = menu(vec![
+        // label:
+        //  not selectable, useful as a title, separator, etc...
+        label("----------------------"),
+        label("terminal-menu"),
+        label("use wasd or arrow keys"),
+        label("enter to select"),
+        label("'q' or esc to exit"),
+        label("-----------------------"),
+        // button:
+        //  exit the menu
+        button("Check Balance"),
+        button("Check Mina"),
+    ]);
 
     run(&menu);
 

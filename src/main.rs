@@ -18,6 +18,10 @@ async fn main() {
 
     let mut menu = youchoose::Menu::new(0..2);
 
+    menu.name("Choose a command")
+        .item("Check balance", check_balance::check_balance)
+        .item("Check mina", check_mina::check_mina);
+
     let subcmd = commands::parse().subcmd;
 
     if subcmd == "check_balance" {

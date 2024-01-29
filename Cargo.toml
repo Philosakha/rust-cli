@@ -15,3 +15,6 @@ serde_json = "1.0.111"
 tokio = { version = "1.35.1", features = ["full"] }
 youchoose = "0.1.1"
 cli-menu-maker = "0.1.1"
+prettycli = "0.1.1"
+menu_rs = "0.3.1"
+terminal-menu = "3.0.0"

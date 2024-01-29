@@ -1,4 +1,4 @@
-use prettytable::{row, Cell, Row, Table};
+use prettytable::{ row, Table };
 
 use clap::Parser;
 use reqwest;
@@ -24,7 +24,7 @@ struct Main {
 }
 
 #[derive(Parser)]
-struct arguement {
+struct Arguement {
     attribute: String,
 }
 

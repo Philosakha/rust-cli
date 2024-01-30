@@ -1,8 +1,9 @@
 mod check_balance;
 mod check_mina;
 use clap::Parser;
+use prettycli::*;
 
-use terminal_menu::{button, label, menu, mut_menu, run};
+use terminal_menu::{ button, label, menu, mut_menu, run };
 
 // declare the parser
 
@@ -21,44 +22,34 @@ async fn check_mina() {
 
 #[tokio::main]
 async fn main() {
-    // put an if statement here to check if the user has entered an argument
-    // if they have, then run the check_balance function
-    // if they haven't, then run the check_mina function
+    info("Say hello to Mina");
 
-    // let subcmd = commands::parse().subcmd;
+    // let menu = menu(
+    //     vec![
+    //         // label:
+    //         //  not selectable, useful as a title, separator, etc...
+    //         label("----------------------"),
+    //         label("terminal-menu"),
+    //         label("use wasd or arrow keys"),
+    //         label("enter to select"),
+    //         label("'q' or esc to exit"),
+    //         label("-----------------------"),
+    //         // button:
+    //         //  exit the menu
+    //         button("Check Balance"),
+    //         button("Check Mina")
+    //     ]
+    // );
 
-    // if subcmd == "check_balance" {
-    //     check_balance::check_balance().await;
-    // } else if subcmd == "check_mina" {
-    //     check_mina::check_mina().await;
+    // run(&menu);
+
+    // println!("Selected: {}", mut_menu(&menu).selected_item_name());
+
+    // if mut_menu(&menu).selected_item_name() == "Check Balance" {
+    //     check_balance().await;
+    // } else if mut_menu(&menu).selected_item_name() == "Check Mina" {
+    //     check_mina().await;
     // } else {
     //     println!("Please enter a valid command");
     // }
-
-    let menu = menu(vec![
-        // label:
-        //  not selectable, useful as a title, separator, etc...
-        label("----------------------"),
-        label("terminal-menu"),
-        label("use wasd or arrow keys"),
-        label("enter to select"),
-        label("'q' or esc to exit"),
-        label("-----------------------"),
-        // button:
-        //  exit the menu
-        button("Check Balance"),
-        button("Check Mina"),
-    ]);
-
-    run(&menu);
-
-    println!("Selected: {}", mut_menu(&menu).selected_item_name());
-
-    if mut_menu(&menu).selected_item_name() == "Check Balance" {
-        check_balance().await;
-    } else if mut_menu(&menu).selected_item_name() == "Check Mina" {
-        check_mina().await;
-    } else {
-        println!("Please enter a valid command");
-    }
 }

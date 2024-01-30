@@ -38,8 +38,8 @@ struct Arguement {
     address: String,
 }
 
-pub async fn check_balance() {
-    let public_key = Arguement::parse().address;
+pub async fn check_balance(public_key: String) {
+    // let public_key = Arguement::parse().address;
 
     let dummy_address = "B62qp95jhpNec4Cex77dkbPTCQ6zNwuKBYNPrWjaK1Dt6nfCr5boobN";
 

@@ -1,5 +1,4 @@
-use clap::Parser;
-
+use prettycli::info;
 use terminal_menu::{ button, label, menu, mut_menu, run };
 
 pub async fn create_frontend() {

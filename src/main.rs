@@ -9,7 +9,7 @@ use terminal_menu::{button, label, menu, mut_menu, run};
 // declare the parser
 
 #[derive(Parser)]
-struct commands {
+struct Commands {
     subcmd: String,
 }
 

@@ -2,7 +2,7 @@ use clap::Parser;
 use reqwest;
 
 /// calling the Mina RPC endpoint to get the balance of an account
-use prettytable::{row, Table};
+use prettytable::{ row, Table };
 
 // declare the struct for the response
 #[derive(Debug, serde::Deserialize)]
@@ -39,9 +39,7 @@ struct Arguement {
 }
 
 pub async fn check_balance(public_key: String) {
-    // let public_key = Arguement::parse().address;
-
-    let dummy_address = "B62qp95jhpNec4Cex77dkbPTCQ6zNwuKBYNPrWjaK1Dt6nfCr5boobN";
+    let _dummy_address = "B62qp95jhpNec4Cex77dkbPTCQ6zNwuKBYNPrWjaK1Dt6nfCr5boobN";
 
     let url = format!("https://api.minaexplorer.com/accounts/{}", public_key);
 
@@ -59,13 +57,9 @@ pub async fn check_balance(public_key: String) {
     table.add_row(row!["Total Balance", json.account.balance.total]);
     table.add_row(row!["Unknown Balance", json.account.balance.unknown]);
     table.add_row(row!["Block Height", json.account.balance.blockHeight]);
-    table.add_row(row![
-        "Locked Balance",
-        json.account
-            .balance
-            .lockedBalance
-            .unwrap_or("None".to_string())
-    ]);
+    table.add_row(
+        row!["Locked Balance", json.account.balance.lockedBalance.unwrap_or("None".to_string())]
+    );
     table.add_row(row!["Sync Status", json.status.syncStatus]);
 
     table.printstd();

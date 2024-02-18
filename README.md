@@ -2,6 +2,8 @@
 
 This is a CLI to interact with Mina protocol.
 
-#### WIP
+#### Functions
 
-This is a work in progress.
+- [x] Get balance
+- [x] Fetch statistics of the Mina blockchain
+- [x] Creating a frontend with easy to use react hooks

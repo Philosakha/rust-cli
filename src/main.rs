@@ -1,12 +1,13 @@
 mod check_balance;
 mod check_mina;
 mod create_frontend;
+mod take_snapshot;
+use cfonts::{render, say, Fonts, Options};
 use clap::Parser;
-use prettycli::*;
 use colored::Colorize;
-use cfonts::{ render, Options, Fonts, say };
+use prettycli::*;
 
-use terminal_menu::{ button, label, menu, mut_menu, run };
+use terminal_menu::{button, label, menu, mut_menu, run};
 
 // declare the parser
 
@@ -27,6 +28,10 @@ async fn create_frontend() {
     create_frontend::create_frontend().await;
 }
 
+async fn take_snapshot() {
+    take_snapshot::take_snapshot().await;
+}
+
 #[tokio::main]
 async fn main() {
     info("Say hello to Mina");
@@ -43,22 +48,22 @@ async fn main() {
     // do not show the menu if the user doesn't press enter
     let _ = std::io::stdin().read_line(&mut String::new());
 
-    let menu = menu(
-        vec![
-            // label:
-            //  not selectable, useful as a title, separator, etc...
-            label("----------------------"),
-            label("use wasd or arrow keys"),
-            label("enter to select"),
-            label("'q' or esc to exit"),
-            label("-----------------------"),
-            // button:
-            //  exit the menu
-            button("Check Balance"),
-            button("Check Mina"),
-            button("Create Frontend")
-        ]
-    );
+    let menu = menu(vec![
+        // label:
+        //  not selectable, useful as a title, separator, etc...
+        label("----------------------"),
+        label("use wasd or arrow keys"),
+        label("enter to select"),
+        label("'q' or esc to exit"),
+        label("-----------------------"),
+        // button:
+        //  exit the menu
+        button("Check Balance"),
+        button("Check Mina"),
+        button("Create Frontend"),
+        button("Take Snapshot of Mina"),
+        button("exit"),
+    ]);
 
     run(&menu);
 
@@ -67,7 +72,9 @@ async fn main() {
     if mut_menu(&menu).selected_item_name() == "Check Balance" {
         info("Please enter your public key");
         let mut public_key = String::new();
-        std::io::stdin().read_line(&mut public_key).expect("Failed to read line");
+        std::io::stdin()
+            .read_line(&mut public_key)
+            .expect("Failed to read line");
 
         wait("Checking balance...");
 
@@ -78,6 +85,11 @@ async fn main() {
     } else if mut_menu(&menu).selected_item_name() == "Create Frontend" {
         wait("Creating frontend...");
         create_frontend().await;
+    } else if mut_menu(&menu).selected_item_name() == "Take Snapshot of Mina" {
+        wait("Taking snapshot...");
+        take_snapshot().await;
+    } else if mut_menu(&menu).selected_item_name() == "exit" {
+        println!("{}", "Goodbye!".green());
     } else {
         println!("Please enter a valid command");
     }
